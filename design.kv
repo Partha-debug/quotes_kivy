@@ -1,0 +1,250 @@
+#:kivy 2.0.0
+
+<LoginScreen>:
+
+    GridLayout:
+        cols: 1
+        padding: 15, 15
+        spacing: 20, 20
+        
+        GridLayout:
+            cols: 1
+            padding: 15, 15
+            spacing: 20, 20
+        
+
+            Label:
+                text: "User Login"
+                font_size: '20sp'
+
+            TextInput:
+                id: usrname
+                hint_text: "Username"
+                
+
+            TextInput:
+                id: passwd
+                password: True
+                hint_text: "Password"
+                
+
+            RelativeLayout:
+                Button:
+                    text:"Login!"
+                    on_press: root.log_in(root.ids.usrname.text,root.ids.passwd.text)
+                    size_hint: 0.3, 0.5
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+                    
+            Label:
+                id: failed_login
+                text: ""
+                color: 1,0.1,0.1,1
+
+        GridLayout:
+            cols: 2
+            size_hint: 0.2,0.2
+            padding: 10,10
+            spacing: 10,0
+            Button:
+                text: "Sign Up!"
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1,0.7,1,1
+                background_color: 1,1,1,0
+                on_press: root.sign_up()
+            
+            Button:
+                text: "Forgot Password?"
+                background_color: 1,1,1,0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1,0.7,1,1
+                on_press: root.frgt_pswd()
+ 
+<SuccessScreen>:
+
+    GridLayout:
+        cols: 1
+        padding: 15,15
+        spacing: 20,20
+        Label:
+            text: "Successfully registered your account!"
+
+        Button:
+            text:"Get back to login screen!"
+            background_color: 1,1,1,0
+            opacity: 1 if self.state == 'normal' else 0.5
+            color: 0.1,0.7,1,1
+            on_press: root.get_back()
+
+<ForgotpswdScrn>:
+    GridLayout:
+        cols: 1
+        padding: 15,15
+        spacing: 20,20
+        
+        Label:
+            text: "Please Enter your username bellow!"
+            font_size: '17sp'
+        TextInput:
+            id: chk_usr
+            hint_text: "Username"
+       
+        Label:
+            text: "Please Enter your new password bellow!"
+            font_size: '17sp'
+        TextInput:
+            id: new_pswd
+            hint_text: "Enter new password"
+            password: True
+        Label:
+            text: "Please reconfirm your new password bellow!"
+            font_size: '17sp'
+        TextInput:
+            id: new_pswd_conf
+            hint_text: "Confirm new password"
+            password: True
+        RelativeLayout:
+            Button:
+                text: "Reset password"
+                on_press: root.reset_pswd(root.ids.chk_usr.text,root.ids.new_pswd.text,root.ids.new_pswd_conf.text)
+                size_hint: 0.3, 0.8
+                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+
+        Label:
+            id: wrng_uname
+            text: ""
+            color: 1,0.1,0.1,1
+        Button:
+            text:"Get back to login screen!"
+            background_color: 1,1,1,0
+            opacity: 1 if self.state == 'normal' else 0.5
+            color: 0.1,0.7,1,1
+            on_press: root.get_back()
+
+
+
+<SignUpScreen>:
+
+    GridLayout:
+        cols: 1
+        padding: 15,15
+        spacing: 20,20
+
+        Label:
+            text: "New user signup"
+
+        TextInput:
+            id: uname
+            hint_text: "Username"
+
+        TextInput:
+            id: pswd
+            hint_text: "Password"
+            password: True
+        RelativeLayout:
+            Button:
+                text:"Register!"
+                size_hint: 0.3, 0.5
+                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+                on_press: root.add_user(root.ids.uname.text,root.ids.pswd.text)
+        Label:
+            id: err_msg
+            text: ""
+            color: 1,0.1,0.1,1
+        Button:
+            text:"Get back to login screen!"
+            background_color: 1,1,1,0
+            opacity: 1 if self.state == 'normal' else 0.5
+            color: 0.1,0.7,1,1
+            on_press: root.get_back()
+
+<SuccessScreen>:
+
+    GridLayout:
+        cols: 1
+        padding: 15,15
+        spacing: 20,20
+
+        Label:
+            text: "Successfully registered your account!"
+
+        Button:
+            text:"Get back to login screen!"
+            background_color: 1,1,1,0
+            opacity: 1 if self.state == 'normal' else 0.5
+            color: 0.1,0.7,1,1
+            on_press: root.get_back()
+
+<ChangedpswdScreen>:
+
+    GridLayout:
+        cols: 1
+        padding: 15,15
+        spacing: 20,20
+        Label:
+            text: "Successfully Changed your account! Password"
+
+        Button:
+            text:"Get back to login screen!"
+            background_color: 1,1,1,0
+            opacity: 1 if self.state == 'normal' else 0.5
+            color: 0.1,0.7,1,1
+            on_press: root.get_back()
+
+<LoggedInScreen>:
+
+    GridLayout:
+        cols: 1
+        padding: 30,30
+        spacing: 30,30
+
+        RelativeLayout:
+
+            ImageButton:
+
+                on_press: root.log_out()
+                source: 'logout_hover.png' if self.hovered else 'logout_nothover.png'
+                size_hint: 0.25, 0.35
+                pos_hint: {'center_x': 0.93, 'center_y': 0.8}
+
+        Label:
+            text: "How do you feel?"
+            font_size: '25sp'
+
+        TextInput:
+            id: feeling
+            hint_text: "Happy, Sad, Unoved..."
+        RelativeLayout:
+
+            Button:
+                text: "Show Quote!"
+                on_press: root.get_quote(root.ids.feeling.text)
+                size_hint: 0.4, 0.6
+                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+
+        ScrollView:
+        
+            Label:
+                id: quote
+                text: ""
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+        
+
+<RootWidget>:
+
+    LoginScreen:
+        name: "login_screen"
+
+    SignUpScreen:
+        name: "sign_up_screen"
+
+    SuccessScreen:
+        name: "success_screen"
+    LoggedInScreen:
+        name: "logged_in_screen"
+    ForgotpswdScrn:
+        name: "forgot_pswd_scrn"
+    ChangedpswdScreen:
+        name: "pswd_changed"
